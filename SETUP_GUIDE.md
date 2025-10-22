@@ -129,3 +129,4 @@ If you run into any issues, the most common problems are:
 3. Server not running or on wrong port
 
 Your app is ready to go! The next step is connecting it to the Shopify Partners Dashboard and testing it with a development store.
+

@@ -82,3 +82,4 @@ If tunneling continues to be problematic:
 5. **Use `shopify app dev` with the correct credentials**
 
 Your app is ready - we just need to get it accessible from the internet!
+

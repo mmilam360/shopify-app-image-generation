@@ -167,3 +167,4 @@ Your Shopify Theme App Extension is complete and ready for deployment. The exten
 5. **Enable the "Add to Cart" button** with the custom design
 
 Follow the steps above to deploy and test your extension!
+

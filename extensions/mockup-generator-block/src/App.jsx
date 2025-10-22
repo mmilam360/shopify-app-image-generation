@@ -1,5 +1,5 @@
 import React, { useState, useRef } from 'react';
-import { Button, Card, TextField, Stack, Banner, Spinner, Image } from '@shopify/polaris';
+import { Button, Card, TextField, Banner, Spinner, Image, BlockStack } from '@shopify/polaris';
 
 const MockupGenerator = () => {
   const [imageFile, setImageFile] = useState(null);
@@ -88,7 +88,7 @@ const MockupGenerator = () => {
 
   return (
     <Card>
-      <Stack vertical spacing="loose">
+      <BlockStack gap="400">
         <div>
           <h2>Create Your Custom Design</h2>
           <p>Upload your logo and describe your design ideas to generate a custom mockup.</p>
@@ -171,9 +171,10 @@ const MockupGenerator = () => {
             </div>
           </div>
         )}
-      </Stack>
+      </BlockStack>
     </Card>
   );
 };
 
 export default MockupGenerator;
+

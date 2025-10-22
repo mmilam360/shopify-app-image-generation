@@ -88,3 +88,4 @@ Once ngrok is running, test your app:
 - **"Invalid URL"**: Make sure you're using the HTTPS URL, not HTTP
 
 Your server is currently running on `http://localhost:3000` - once you get ngrok working, you'll have a public URL to use with Shopify!
+
