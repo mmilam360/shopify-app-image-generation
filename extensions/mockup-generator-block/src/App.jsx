@@ -40,11 +40,18 @@ const MockupGenerator = () => {
         reader.readAsDataURL(imageFile);
       });
 
-      // Call the Cloudflare Worker
+      console.log('Sending request to Cloudflare Worker...');
+      console.log('Image size:', base64Image.length);
+      console.log('Design note:', designNote);
+
+      // Call the Cloudflare Worker with proper headers
       const response = await fetch('https://arotags-ai-mockup-generator.mmilam360.workers.dev/', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
+          'Access-Control-Allow-Origin': '*',
+          'Access-Control-Allow-Methods': 'POST, GET, OPTIONS',
+          'Access-Control-Allow-Headers': 'Content-Type',
         },
         body: JSON.stringify({
           image: base64Image,
@@ -53,11 +60,17 @@ const MockupGenerator = () => {
         }),
       });
 
+      console.log('Response status:', response.status);
+      console.log('Response headers:', response.headers);
+
       if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
+        const errorText = await response.text();
+        console.error('Response error:', errorText);
+        throw new Error(`HTTP error! status: ${response.status}, message: ${errorText}`);
       }
 
       const result = await response.json();
+      console.log('Response result:', result);
       
       if (result.success && result.mockupUrl) {
         setGeneratedImage(result.mockupUrl);
@@ -72,7 +85,7 @@ const MockupGenerator = () => {
       }
     } catch (err) {
       console.error('Error generating mockup:', err);
-      setError(err.message || 'Failed to generate mockup. Please try again.');
+      setError(`Error: ${err.message}. Please check the browser console for more details.`);
       
       // Send error message to parent Shopify page
       window.parent.postMessage({
@@ -81,6 +94,31 @@ const MockupGenerator = () => {
       }, '*');
     } finally {
       setIsGenerating(false);
+    }
+  };
+
+  const testConnection = async () => {
+    try {
+      console.log('Testing connection to Cloudflare Worker...');
+      const response = await fetch('https://arotags-ai-mockup-generator.mmilam360.workers.dev/', {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+      
+      console.log('Test response status:', response.status);
+      const text = await response.text();
+      console.log('Test response text:', text);
+      
+      if (response.ok) {
+        setError('✅ Connection test successful! Worker is accessible.');
+      } else {
+        setError(`❌ Connection test failed: ${response.status} - ${text}`);
+      }
+    } catch (err) {
+      console.error('Connection test error:', err);
+      setError(`❌ Connection test failed: ${err.message}`);
     }
   };
 
@@ -135,6 +173,14 @@ const MockupGenerator = () => {
             multiline={4}
           />
         </div>
+
+        {/* Test Connection Button */}
+        <Button
+          onClick={testConnection}
+          disabled={isGenerating}
+        >
+          Test Connection to Worker
+        </Button>
 
         {/* Generate Button */}
         <Button
