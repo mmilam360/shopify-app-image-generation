@@ -69,7 +69,9 @@ const MockupGenerator = () => {
       console.log('Response result:', result);
       
       if (result.success && result.mockupUrl) {
+        console.log('Setting generated image:', result.mockupUrl);
         setGeneratedImage(result.mockupUrl);
+        console.log('Generated image state should be set to:', result.mockupUrl);
         
         // Send success message to parent Shopify page
         window.parent.postMessage({
@@ -210,6 +212,7 @@ const MockupGenerator = () => {
         {generatedImage && (
           <div>
             <h3>Your Custom Mockup</h3>
+            <p>Debug: Generated image URL = {generatedImage}</p>
             <Image
               source={generatedImage}
               alt="Generated mockup"
