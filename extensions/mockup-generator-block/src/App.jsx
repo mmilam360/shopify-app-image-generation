@@ -49,14 +49,10 @@ const MockupGenerator = () => {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'Access-Control-Allow-Origin': '*',
-          'Access-Control-Allow-Methods': 'POST, GET, OPTIONS',
-          'Access-Control-Allow-Headers': 'Content-Type',
         },
         body: JSON.stringify({
           image: base64Image,
           note: designNote,
-          // Add reference image if needed
         }),
       });
 
@@ -104,9 +100,6 @@ const MockupGenerator = () => {
       // Test 1: Simple GET request
       const getResponse = await fetch('https://arotags-ai-mockup-generator.mmilam360.workers.dev/', {
         method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-        },
       });
       
       console.log('GET Test response status:', getResponse.status);
@@ -120,9 +113,6 @@ const MockupGenerator = () => {
         try {
           const optionsResponse = await fetch('https://arotags-ai-mockup-generator.mmilam360.workers.dev/', {
             method: 'OPTIONS',
-            headers: {
-              'Content-Type': 'application/json',
-            },
           });
           
           console.log('OPTIONS Test response status:', optionsResponse.status);
