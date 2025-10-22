@@ -100,21 +100,45 @@ const MockupGenerator = () => {
   const testConnection = async () => {
     try {
       console.log('Testing connection to Cloudflare Worker...');
-      const response = await fetch('https://arotags-ai-mockup-generator.mmilam360.workers.dev/', {
+      
+      // Test 1: Simple GET request
+      const getResponse = await fetch('https://arotags-ai-mockup-generator.mmilam360.workers.dev/', {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
         },
       });
       
-      console.log('Test response status:', response.status);
-      const text = await response.text();
-      console.log('Test response text:', text);
+      console.log('GET Test response status:', getResponse.status);
+      const getText = await getResponse.text();
+      console.log('GET Test response text:', getText);
       
-      if (response.ok) {
-        setError('✅ Connection test successful! Worker is accessible.');
+      if (getResponse.ok) {
+        setError('✅ GET Connection test successful! Worker is accessible.');
+        
+        // Test 2: OPTIONS request (CORS preflight)
+        try {
+          const optionsResponse = await fetch('https://arotags-ai-mockup-generator.mmilam360.workers.dev/', {
+            method: 'OPTIONS',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+          });
+          
+          console.log('OPTIONS Test response status:', optionsResponse.status);
+          console.log('OPTIONS Test response headers:', [...optionsResponse.headers.entries()]);
+          
+          if (optionsResponse.ok) {
+            setError('✅ Both GET and OPTIONS tests successful! CORS should work.');
+          } else {
+            setError('⚠️ GET works but OPTIONS failed. CORS issue likely.');
+          }
+        } catch (optionsError) {
+          console.error('OPTIONS test error:', optionsError);
+          setError('⚠️ GET works but OPTIONS failed. CORS issue likely.');
+        }
       } else {
-        setError(`❌ Connection test failed: ${response.status} - ${text}`);
+        setError(`❌ GET Connection test failed: ${getResponse.status} - ${getText}`);
       }
     } catch (err) {
       console.error('Connection test error:', err);
