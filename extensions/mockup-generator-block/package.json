@@ -1,0 +1,32 @@
+{
+  "name": "mockup-generator-block",
+  "version": "1.0.0",
+  "description": "AI-powered product mockup generator for Shopify",
+  "main": "App.jsx",
+  "scripts": {
+    "dev": "shopify app dev",
+    "build": "shopify app build",
+    "deploy": "shopify app deploy"
+  },
+  "dependencies": {
+    "@shopify/polaris": "^12.0.0",
+    "@shopify/app-bridge": "^4.0.0",
+    "@shopify/app-bridge-react": "^4.0.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
+  "devDependencies": {
+    "@shopify/cli": "^3.86.1",
+    "@vitejs/plugin-react": "^4.0.0",
+    "vite": "^4.0.0"
+  },
+  "keywords": [
+    "shopify",
+    "theme-app-extension",
+    "mockup-generator",
+    "ai",
+    "react"
+  ],
+  "author": "Your Name",
+  "license": "MIT"
+}

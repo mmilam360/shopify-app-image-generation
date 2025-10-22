@@ -1,0 +1,46 @@
+{
+  "name": "mockup-generator-block",
+  "type": "theme_app_extension",
+  "version": "1.0.0",
+  "description": "AI-powered product mockup generator for custom designs",
+  "settings": [
+    {
+      "id": "title",
+      "type": "single_line_text_field",
+      "label": "Title",
+      "default": "Custom Design Generator"
+    },
+    {
+      "id": "description",
+      "type": "multi_line_text_field",
+      "label": "Description",
+      "default": "Upload your logo and add design instructions to generate a custom mockup."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "mockup_generator",
+      "name": "Mockup Generator",
+      "settings": [
+        {
+          "id": "title",
+          "type": "single_line_text_field",
+          "label": "Title",
+          "default": "Create Your Custom Design"
+        },
+        {
+          "id": "button_text",
+          "type": "single_line_text_field",
+          "label": "Generate Button Text",
+          "default": "Generate Mockup"
+        },
+        {
+          "id": "placeholder_text",
+          "type": "multi_line_text_field",
+          "label": "Instructions Placeholder",
+          "default": "Describe your design ideas, colors, or any specific requirements..."
+        }
+      ]
+    }
+  ]
+}
